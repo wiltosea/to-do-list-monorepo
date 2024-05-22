@@ -17,7 +17,7 @@ function App() {
   const handlePost = async (event) => {
     if (newItem === '') return alert('Please enter a value');
     try {
-      await create({ id: list[list.length-1].id+1, title: newItem, completed: false});
+      await create({ title: newItem, completed: false});
       setNewItem('');
       event.target.value = '';
       fetchList();
@@ -52,9 +52,6 @@ function App() {
     fetchList();
   }, []);
 
-  if (list.length === 0) {
-    return <h1>Loading...</h1>;
-  } else {
     return (
       <>
         <div className="container-fluid">
@@ -85,20 +82,20 @@ function App() {
             <div className="row">
               <div className="col">
                 {list.map((item) => (
-                  <div key={item.id} className="form-check">
+                  <div key={item._id} className="form-check">
                     <input
                       className="form-check-input"
                       type="checkbox"
                       value=""
-                      id={item.id}
+                      id={item._id}
                       checked={item.completed}
                       onChange={(e) => {setList(list.map((i) => {
-                        if (i.id === item.id) {
+                        if (i._id === item._id) {
                           i.completed = e.target.checked;
                           console.log(e.target.checked);
                           // console.log('item do onChange do Input 🛠 ',i)
                           // console.log('item do onChange do Input 🛠 ',i)
-                          handleUpdateCheck(i.id, i.title, i.completed);
+                          handleUpdateCheck(i._id, i.title, i.completed);
                         }
                         console.log(list)
                         return i;
@@ -120,6 +117,5 @@ function App() {
       </>
     );
   }
-}
 
 export default App;
