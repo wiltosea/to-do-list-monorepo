@@ -30,8 +30,11 @@ router.post('/list', (req, res) => {
 router.put('/list/:id', (req, res) => {
   const id = parseInt(req.params.id, 10);
   const item = list.find((element) => element.id === id);
+  console.log(req.body)
   if (item) {
+    console.log('item 🛠 ',item)
     item.title = req.body.title;
+    item.completed = req.body.completed;
   }
   res.json(item);
 });

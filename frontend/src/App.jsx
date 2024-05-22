@@ -1,6 +1,5 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import './App.css';
-import { useState } from 'react';
 import DataService from './api/routes';
 
 const { getAll, create, update } = new DataService();
@@ -22,10 +21,10 @@ function App() {
       setNewItem('');
       event.target.value = '';
       fetchList();
-      console.log(list)
+      console.log('list do handlePost 🛠 ',list)
       setLastItem(lastItem+1);
     } catch (err) {
-      console.log(err);
+      console.log('Erro do handlePost 🛠 ',err);
     }
     fetchList();
   };
@@ -36,12 +35,16 @@ function App() {
     }
   };
 
-  const handleUpdateCheck = async (id, completed, title) => {
+  const handleUpdateCheck = async (id, title,completed) => {
     try {
-      await update(id, title, { completed });
+      console.log('id 🛠 ',id);
+      console.log('title 🛠 ',title);
+      console.log('completed 🛠 ', completed);
+      const data = {title: title, completed: completed};
+      await update(id, data);
       fetchList();
     } catch (err) {
-      console.log(err);
+      console.log('Erro do handleUpdateCheck 🛠 ',err);
     }
   }
 
@@ -92,7 +95,9 @@ function App() {
                       onChange={(e) => {setList(list.map((i) => {
                         if (i.id === item.id) {
                           i.completed = e.target.checked;
-                          console.log(i)
+                          console.log(e.target.checked);
+                          // console.log('item do onChange do Input 🛠 ',i)
+                          // console.log('item do onChange do Input 🛠 ',i)
                           handleUpdateCheck(i.id, i.title, i.completed);
                         }
                         console.log(list)
@@ -100,11 +105,12 @@ function App() {
                       }
                       ))}}
                     />
-                    <label
+                    <span
                       className="form-check-label justify-content-start"
+                      style={(item.completed)?{textDecoration: 'line-through'}:{}}
                     >
                       {item.title}
-                    </label>
+                    </span>
                   </div>
                 ))}
               </div>
