@@ -1,0 +1,32 @@
+version: '3.7'
+
+services:
+  frontend:
+    build:
+      context: ./frontend
+    ports:
+      - "8080:8080"
+    depends_on:
+      - backend
+
+  backend:
+    build:
+      context: ./backend
+    ports:
+      - "4000:4000"
+    environment:
+      - MONGO_URI=mongodb://localhost:27017/mongo-to-do
+      - MONGO_USER=admin
+      - MONGO_PASSWORD=adminpassword
+    depends_on:
+      - mongo
+
+  mongo:
+    image: mongo
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=admin
+      - MONGO_INITDB_ROOT_PASSWORD=adminpassword
+    volumes:
+      - ./mongo-data:/data/db
+    ports:
+      - "27017:27017"

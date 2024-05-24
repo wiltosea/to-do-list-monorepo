@@ -2,30 +2,30 @@ import http from "./http";
 
 export default class DataService {
   getAll() {
-    return http.get("/list");
+    return http.get("/items");
   }
 
-  get(id) {
-    return http.get(`/list/${id}`);
-  }
+  // get(id) {
+  //   return http.get(`/items/${id}`);
+  // }
 
   create(data) {
-    return http.post("/list", data);
+    return http.post("/items", data);
   }
 
   update(id, data) {
-    return http.put(`/list/${id}`, data);
+    return http.put(`/items/${id}`, data);
   }
 
   delete(id) {
-    return http.delete(`/list/${id}`);
+    return http.delete(`/items/${id}`);
   }
 
-  deleteAll() {
-    return http.delete(`/list`);
-  }
+  // deleteAll() {
+  //   return http.delete(`/items`);
+  // }
 
-  findByTitle(title) {
-    return http.get(`/list?title=${title}`);
-  }
+  // findByTitle(title) {
+  //   return http.get(`/items?title=${title}`);
+  // }
 }
