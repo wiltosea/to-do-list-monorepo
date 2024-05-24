@@ -6,16 +6,15 @@ Este projeto é um To Do List, onde é possível adicionar, remover e marcar tar
 
 ## Tecnologias
 
-- React
-- React Hooks
-- React Router
-- Node.js
-- ExpressJS
-- MongoDB
-- Mongoose
-- Nodemon
-- Cors
-- Axios
+- React.JS para frontend
+- React Hooks para gerenciamento de estado
+- Axios para requisições HTTP
+- Node.js para backend
+- ExpressJS para criação de rotas e middlewares
+- MongoDB para armazenamento de dados
+- Mongoose para modelagem de dados
+- Nodemon para reiniciar o servidor automaticamente
+- Cors para permitir requisições de outros domínios
 
 ## Instalação
 
