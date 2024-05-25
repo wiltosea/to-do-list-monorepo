@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import './App.css';
 import DataService from './api/routes';
 
-const { getAll, create, update } = new DataService();
+const { getAll, create, update, remove } = new DataService();
 
 function App() {
   const [list, setList] = useState([]);
@@ -12,6 +12,12 @@ function App() {
   const fetchList = async () => {
     const { data } = await getAll();
     setList(data);
+  };
+  
+  const handleKeyDown = (event) => {
+    if(event.key === 'Enter') {
+      handlePost(event);
+    }
   };
 
   const handlePost = async (event) => {
@@ -29,9 +35,14 @@ function App() {
     fetchList();
   };
 
-  const handleKeyDown = (event) => {
-    if(event.key === 'Enter') {
-      handlePost(event);
+
+  const handleDelete = async (id) => {
+    console.log(id)
+    try {
+      await remove(id);
+      fetchList();
+    } catch (err) {
+      console.log('Erro do handleDelete 🛠 ',err);
     }
   };
 
@@ -82,7 +93,7 @@ function App() {
             <div className="row">
               <div className="col">
                 {list.map((item) => (
-                  <div key={item._id} className="form-check">
+                  <div key={item._id} className="form-check align-items-center">
                     <input
                       className="form-check-input"
                       type="checkbox"
@@ -108,6 +119,7 @@ function App() {
                     >
                       {item.title}
                     </span>
+                    {(item.completed)?(<span className='p-2' onClick={()=>handleDelete(item._id)} style={{cursor: 'pointer'}}><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 50 50"><path fill="currentColor" d="M20 18h2v16h-2zm4 0h2v16h-2zm4 0h2v16h-2zm-16-6h26v2H12zm18 0h-2v-1c0-.6-.4-1-1-1h-4c-.6 0-1 .4-1 1v1h-2v-1c0-1.7 1.3-3 3-3h4c1.7 0 3 1.3 3 3z"/><path fill="currentColor" d="M31 40H19c-1.6 0-3-1.3-3.2-2.9l-1.8-24l2-.2l1.8 24c0 .6.6 1.1 1.2 1.1h12c.6 0 1.1-.5 1.2-1.1l1.8-24l2 .2l-1.8 24C34 38.7 32.6 40 31 40"  /></svg></span>):''}
                   </div>
                 ))}
               </div>

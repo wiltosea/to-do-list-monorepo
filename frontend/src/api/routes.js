@@ -4,11 +4,6 @@ export default class DataService {
   getAll() {
     return http.get("/items");
   }
-
-  // get(id) {
-  //   return http.get(`/items/${id}`);
-  // }
-
   create(data) {
     return http.post("/items", data);
   }
@@ -17,15 +12,8 @@ export default class DataService {
     return http.put(`/items/${id}`, data);
   }
 
-  delete(id) {
+  remove(id) {
     return http.delete(`/items/${id}`);
   }
 
-  // deleteAll() {
-  //   return http.delete(`/items`);
-  // }
-
-  // findByTitle(title) {
-  //   return http.get(`/items?title=${title}`);
-  // }
 }

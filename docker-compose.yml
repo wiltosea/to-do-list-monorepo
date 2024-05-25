@@ -15,9 +15,7 @@ services:
     ports:
       - "4000:4000"
     environment:
-      - MONGO_URI=mongodb://localhost:27017/mongo-to-do
-      - MONGO_USER=admin
-      - MONGO_PASSWORD=adminpassword
+      - MONGO_URI=mongodb://127.0.0.1:27017/mongo-to-do
     depends_on:
       - mongo
 
